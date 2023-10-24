@@ -1,20 +1,10 @@
-function check_error() {
-    r=$?
-    error_message=$1
-    if [ $r != 0 ];
-    then 
-        if ! [ -z "$error_message" ];
-        then
-            echo "ERROR: $error_message" 2>&1
-        fi
-        exit 1;
-    fi
-}
+#!/bin/bash
+# Sends all screenshots not yet uploaded
 
 SCRIPT_ROOT="/home/gus/psp_stuff/script"
 
 $SCRIPT_ROOT/get_screenshots.sh
-check_error
+$SCRIPT_ROOT/check_error.sh
 
 telegram_bot_upload_path="/home/gus/projects/telegrambot/sendImage.sh"
 already_uploaded_file="/home/gus/psp_stuff/screenshots/already_uploaded.txt"

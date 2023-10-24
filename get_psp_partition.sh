@@ -1,3 +1,6 @@
+#!/bin/bash
+# Gets PSP partition name
+
 output=$(lsblk -fl | grep "vfat *FAT32 PSP" | perl -pe "s/(....).*/\1/")
 
 if [ -z $output ]

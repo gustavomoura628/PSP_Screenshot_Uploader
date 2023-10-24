@@ -1,20 +1,10 @@
-function check_error() {
-    r=$?
-    error_message=$1
-    if [ $r != 0 ];
-    then 
-        if ! [ -z "$error_message" ];
-        then
-            echo "ERROR: $error_message" 2>&1
-        fi
-        exit 1;
-    fi
-}
+#!/bin/bash
+# Mounts psp into a random /tmp/ folder and writes the folder name into /tmp/psp_folder
 
 SCRIPT_ROOT="/home/gus/psp_stuff/script"
 
 partition=$($SCRIPT_ROOT/get_psp_partition.sh)
-check_error
+$SCRIPT_ROOT/check_error.sh
 
 if [ ! -z "$(lsblk | grep $partition | awk '{print $7}')" ]; 
 then 
@@ -31,10 +21,10 @@ echo Temporary Mount Point: $psp_folder 1>&2
 echo $psp_folder > /tmp/psp_folder
 
 mkdir $psp_folder
-check_error "Could not create psp mount folder."
+$SCRIPT_ROOT/check_error.sh "Could not create psp mount folder."
 
 sudo mount /dev/$partition $psp_folder
-check_error "Could not mount psp."
+$SCRIPT_ROOT/check_error.sh "Could not mount psp."
 
 echo "Successfully mounted psp!" 1>&2
 exit 0

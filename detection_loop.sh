@@ -1,4 +1,9 @@
+#!/bin/bash
+# Loops forever waiting for psp to connect
+# If connected, runs screenshot extraction routines
+
 SCRIPT_ROOT="/home/gus/psp_stuff/script"
+
 previously_connected="false"
 while true
 do
